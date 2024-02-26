@@ -1,4 +1,5 @@
-# explaining re.compile
+# explaining .compile(), .match(), and slicing
+
 import re
 
 def comp():
