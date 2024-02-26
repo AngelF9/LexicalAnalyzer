@@ -15,7 +15,7 @@ def lexicalAnalyzer(input_string):
 
     # r is used to make the string a raw string. 
     # In a string when using \ would need to be escaped with another \. r makes it a raw string and \ is not needed to be escaped.
-    totekn_types = {
+    token_types = {
         'keyword': r"\b(" + "|".join(keywords) + r")\b",
 
         # regular expression for the following:
@@ -34,3 +34,19 @@ def lexicalAnalyzer(input_string):
     tokens = []
 
     # Loop through the input string
+    while input_string:
+        match = None # will hold the result of the RE match if one is found
+
+        for token_type, token_Re in token_types.items():
+            regex = re.compile(token_Re) # compile the regular expression pattern into a regular expression object
+            
+            # do not need to loop through the input_string. instead use the RE to match patterns.
+            match = regex.match(input_string) # match the regular expression pattern to the input string
+            if match:
+                # TODO: store the token and lexeme in tokens. 
+                break
+
+        if not match: # if no token matched, there is an error in the input
+            print("Error: Invalid input")
+            return
+    return tokens
